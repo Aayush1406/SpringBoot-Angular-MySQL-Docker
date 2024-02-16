@@ -1,0 +1,33 @@
+version: '3.0' #version of the docker compose file.
+
+services: # Each service corresponds to a container
+  web: # Service name for Angular
+    build: 
+      context: ../student-app-v1   # Lookup for the Dockerfile of Angular to build image
+    ports:
+      - "4200:4200" # maps host m/c port to container's port.
+    depends_on:
+      - app  
+
+  app:
+    build:
+      context: ../SpringBootAngularCRUD
+    ports:
+      - 9898:9898
+    depends_on:
+      aayushdb:
+        condition: service_healthy
+  
+  aayushdb: #Service name for MySQL
+    image: mysql:8.0 #docker image
+    restart: always 
+    environment:
+      MYSQL_ROOT_PASSWORD: aayush
+      MYSQL_DATABASE: bootangular
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - "./data:/var/lib/mysql"

@@ -1,0 +1,5 @@
+
+layering:
+
+1. existing layers are not pushed.
+2. Same layers are not built during `docker build` : performance

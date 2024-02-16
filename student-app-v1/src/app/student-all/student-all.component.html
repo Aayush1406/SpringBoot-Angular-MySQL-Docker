@@ -1,0 +1,30 @@
+<h3>All Students</h3>
+<table class="table">
+    <tbody>
+    <tr class="bg-info text-white">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Fee</th>
+        <th>Course</th>
+        <th>Discount</th>
+        <th>GST</th>
+        <th>Operation</th>
+    </tr>
+
+    <tr *ngFor = "let s of students">
+        <td>{{s.stdId}}</td> <!--{{}} = interpolation-->
+        <td>{{s.stdName}}</td> <!--{{}} = interpolation-->
+        <td>{{s.stdFee}}</td> <!--{{}} = interpolation-->
+        <td>{{s.stdCourse}}</td> <!--{{}} = interpolation-->
+        <td>{{s.stdFeeDisc}}</td> <!--{{}} = interpolation-->
+        <td>{{s.stdFeeGst}}</td> <!--{{}} = interpolation-->
+        <td>
+            <button class="btn btn-danger" (click)='deleteStudent(s.stdId)'>Delete </button>
+            |
+            <button class="btn btn-success" (click)="editStudent(s.stdId)">Edit</button>
+
+        </td>  
+
+    </tr>
+    </tbody>   
+</table>
